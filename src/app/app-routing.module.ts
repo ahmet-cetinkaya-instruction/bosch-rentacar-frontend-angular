@@ -6,6 +6,8 @@ import { NgModule } from '@angular/core';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomePageComponent },
+  // : ile başlayan bir path parametresi olduğunu belirtir.
+  { path: 'brands/:brandName', component: HomePageComponent },
   { path: 'login', component: LoginPageComponent },
 ];
 

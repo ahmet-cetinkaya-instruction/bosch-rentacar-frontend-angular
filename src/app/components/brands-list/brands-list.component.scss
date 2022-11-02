@@ -1,8 +1,18 @@
+@import "node_modules/bootstrap/scss/bootstrap";
+
 // ul > li:nth-child(odd) {} // CSS
 
 // SCSS
 ul {
   & > li:nth-child(odd){
     background-color: #e2e2e2;
+  }
+
+  li{
+    cursor: pointer;
+
+    &.active{
+      @extend .bg-primary, .text-light;
+    }
   }
 }

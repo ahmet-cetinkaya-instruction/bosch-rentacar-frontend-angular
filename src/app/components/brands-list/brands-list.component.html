@@ -1,6 +1,12 @@
 <ul class="list-group">
+  <li
+    class="list-group-item"
+    [ngClass]="{ active: selectedBrandName === 'All' }"
+    (click)="selectBrand('All')"
+  >
+    All
+  </li>
   <!-- Built-in Directives -->
-
   <!--  <li *ngFor="let brand of brands" class="list-group-item">
     {{ brand.name }}
   </li> -->
@@ -9,7 +15,13 @@
   <!-- div kullandığımızda mevcut stiller bozulabilir. -->
   <ng-template ngFor let-brand [ngForOf]="brands">
     <!-- Sanal, html tarafında render'lenmayan, etiket işlevi görür. -->
-    <li *ngIf="!brand.discontinued" class="list-group-item">
+    <li
+      *ngIf="!brand.discontinued"
+      class="list-group-item"
+      [ngClass]="{ active: selectedBrandName === brand.name }"
+      (click)="selectBrand(brand)"
+    >
+      <!-- routerLink="/brands/{{ brand.name }}" -->
       {{ brand.name }}
     </li>
   </ng-template>
