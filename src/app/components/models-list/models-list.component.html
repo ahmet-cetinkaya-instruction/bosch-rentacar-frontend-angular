@@ -1,1 +1,7 @@
-<p>models-list works!</p>
+<div class="row">
+  <ng-template ngFor let-model [ngForOf]="models">
+    <div *ngIf="!model.brand.discontinued" class="col mb-3">
+      <app-model-card [model]="model"></app-model-card>
+    </div>
+  </ng-template>
+</div>
