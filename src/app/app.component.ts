@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { title } from './constants/seo';
 
 @Component({
   selector: 'app-root', // HTML'de kullanmak için component tag'ini tanımlar.
@@ -6,9 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'], // CSS template'ini tanımlar.
 })
 export class AppComponent {
-  title: string = 'bosch-rentacar-frontend-angular'; // State, Durum
-
-  getTitle(): string {
-    return 'Bosch Rent A Car';
-  }
+  title: string = title; // State, Durum
 }

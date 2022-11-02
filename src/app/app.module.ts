@@ -6,6 +6,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { BrandsListComponent } from './components/brands-list/brands-list.component';
 import { ModelsListComponent } from './components/models-list/models-list.component';
 import { ModelCardComponent } from './components/model-card/model-card.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import { ModelCardComponent } from './components/model-card/model-card.component
     BrandsListComponent,
     ModelsListComponent,
     ModelCardComponent,
+    HomePageComponent,
+    LoginPageComponent,
   ],
   imports: [
     // Angular modüllerini içeren bir dizi. Bu modüllerin bazıları, Angular'ın temel işlevlerini sağlar. Diğerleri, Angular'ın özelliklerini genişletir.

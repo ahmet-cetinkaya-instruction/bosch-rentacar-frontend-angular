@@ -1,15 +1,5 @@
 <div class="container">
   <app-navbar></app-navbar>
-
-  <h1>{{ title }} app is running!!</h1>
-  {{ getTitle() }}
-
-  <div class="row mt-4">
-    <div class="col-3">
-      <app-brands-list></app-brands-list>
-    </div>
-    <div class="col">
-      <app-models-list></app-models-list>
-    </div>
-  </div>
+  <!-- <app-home-page [title]="title"></app-home-page> -->
+  <router-outlet></router-outlet>
 </div>
