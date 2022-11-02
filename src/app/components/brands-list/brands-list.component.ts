@@ -1,5 +1,5 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Route, Router } from '@angular/router';
 
 import { Brand } from 'src/app/models/brand';
 
@@ -15,15 +15,23 @@ export class BrandsListComponent implements OnInit {
     { name: 'Audi', discontinued: true },
     { name: 'Volkswagen', discontinued: false },
   ];
-  selectedBrandName: string = 'All';
+  selectedBrandName!: string;
 
   // private router: Router;
   // constructor(router: Router) {
   //   this.router = router;
   // }
-  constructor(private router: Router) {}
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getSelectedBrand();
+  }
+
+  getSelectedBrand() {
+    this.activatedRoute.params.subscribe((params) => {
+      this.selectedBrandName = params['brandName'] || 'All';
+    });
+  }
 
   selectBrand(brand: Brand | 'All'): void {
     const isAll = typeof brand == 'string' && (brand as string) === 'All';
@@ -31,7 +39,7 @@ export class BrandsListComponent implements OnInit {
       ? ['/']
       : ['/brands', (brand as Brand).name];
 
-    this.selectedBrandName = isAll ? 'All' : (brand as Brand).name;
+    // this.selectedBrandName = isAll ? 'All' : (brand as Brand).name;
     this.router.navigate(routeCommands);
     // this.router.navigateByUrl(`/brands/${brand.name}`); // ALT+GR/CTRL+ALT + ,
   }
