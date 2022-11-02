@@ -1,0 +1,16 @@
+<ul class="list-group">
+  <!-- Built-in Directives -->
+
+  <!--  <li *ngFor="let brand of brands" class="list-group-item">
+    {{ brand.name }}
+  </li> -->
+
+  <!-- *ngFor döngüsünde yer alan let brand, sadece etiketin iç kısmında geçerlidir. -->
+  <!-- div kullandığımızda mevcut stiller bozulabilir. -->
+  <ng-template ngFor let-brand [ngForOf]="brands">
+    <!-- Sanal, html tarafında render'lenmayan, etiket işlevi görür. -->
+    <li *ngIf="!brand.discontinued" class="list-group-item">
+      {{ brand.name }}
+    </li>
+  </ng-template>
+</ul>
