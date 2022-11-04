@@ -1,13 +1,15 @@
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { BrandsListComponent } from './components/brands-list/brands-list.component';
-import { ModelsListComponent } from './components/models-list/models-list.component';
-import { ModelCardComponent } from './components/model-card/model-card.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { CoreModule } from './core/core.module';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { HttpClientModule } from '@angular/common/http';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { ModelCardComponent } from './components/model-card/model-card.component';
+import { ModelsListComponent } from './components/models-list/models-list.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { NgModule } from '@angular/core';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
     // Angular modüllerini içeren bir dizi. Bu modüllerin bazıları, Angular'ın temel işlevlerini sağlar. Diğerleri, Angular'ın özelliklerini genişletir.
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    CoreModule,
   ],
   providers: [], // Dependency Injection
   bootstrap: [AppComponent], // AppModule'in başlangıçta çalıştıracağını component.
