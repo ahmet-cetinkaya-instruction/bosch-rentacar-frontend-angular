@@ -10,6 +10,7 @@ import { ModelCardComponent } from './components/model-card/model-card.component
 import { ModelsListComponent } from './components/models-list/models-list.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgModule } from '@angular/core';
+import { SpinnerLoadingComponent } from './components/spinner-loading/spinner-loading.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { NgModule } from '@angular/core';
     ModelCardComponent,
     HomePageComponent,
     LoginPageComponent,
+    SpinnerLoadingComponent,
   ],
   imports: [
     // Angular modüllerini içeren bir dizi. Bu modüllerin bazıları, Angular'ın temel işlevlerini sağlar. Diğerleri, Angular'ın özelliklerini genişletir.

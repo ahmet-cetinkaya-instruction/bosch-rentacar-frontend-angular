@@ -11,18 +11,22 @@
     {{ brand.name }}
   </li> -->
 
+  <app-spinner-loading
+    *ngIf="brandsPaginatedList == undefined; else brandsList"
+  ></app-spinner-loading>
   <!-- *ngFor döngüsünde yer alan let brand, sadece etiketin iç kısmında geçerlidir. -->
   <!-- div kullandığımızda mevcut stiller bozulabilir. -->
-  <ng-template ngFor let-brand [ngForOf]="brands">
-    <!-- Sanal, html tarafında render'lenmayan, etiket işlevi görür. -->
-    <li
-      *ngIf="!brand.discontinued"
-      class="list-group-item"
-      [ngClass]="{ active: selectedBrandName === brand.name }"
-      (click)="selectBrand(brand)"
-    >
-      <!-- routerLink="/brands/{{ brand.name }}" -->
-      {{ brand.name }}
-    </li>
+  <ng-template #brandsList>
+    <ng-template ngFor let-brand [ngForOf]="brandsPaginatedList.items">
+      <!-- Sanal, html tarafında render'lenmayan, etiket işlevi görür. -->
+      <li
+        class="list-group-item"
+        [ngClass]="{ active: selectedBrandName === brand.name }"
+        (click)="selectBrand(brand)"
+      >
+        <!-- routerLink="/brands/{{ brand.name }}" -->
+        {{ brand.name }}
+      </li>
+    </ng-template>
   </ng-template>
 </ul>

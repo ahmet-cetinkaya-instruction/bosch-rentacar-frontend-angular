@@ -17,7 +17,7 @@ export class BrandsService {
   getList(
     pageRequest: GetListBrandsRequest
   ): Observable<GetListBrandsResponse> {
-    // Observable bizim için gözlemlenebilir bir işlem olduğunu belirtir. Sekron işlemlerin sonucunu gözlemler ve sonucunda çeşitli event sağlar.
+    // Observable bizim için gözlemlenebilir bir işlem olduğunu belirtir. Sekron işlemlerin sonucunu gözlemler ve sonucunda çeşitli event
     return this.httpClient.get<GetListBrandsResponse>(this.controllerUrl, {
       params: {
         // index: pageRequest.index,
