@@ -1,4 +1,4 @@
-import { GetListBrandsRequest } from './../models/getListBrandsRequest';
+import { GetListBrandsRequest } from '../models/getListBrandsRequest';
 import { GetListBrandsResponse } from '../models/getListBrandsResponse';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';

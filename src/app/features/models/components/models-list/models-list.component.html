@@ -1,0 +1,10 @@
+<div class="row">
+  <app-spinner-loading *ngIf="!models; else modelsList"></app-spinner-loading>
+  <ng-template #modelsList>
+    <ng-template ngFor let-model [ngForOf]="models.items">
+      <div class="col mb-3">
+        <app-model-card [model]="model"></app-model-card>
+      </div>
+    </ng-template>
+  </ng-template>
+</div>

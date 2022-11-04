@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Model } from 'src/app/models/model';
+import { ListModel } from 'src/app/features/models/models/listModel';
 
 @Component({
   selector: 'app-model-card',
@@ -19,7 +19,7 @@ export class ModelCardComponent implements OnInit {
   // Undefined ise, çalışma anında veya programcının geçtiği bir değer olmadığı anlamına gelir.
 
   // !: Normalde undefined olmayacağını, kullanmandan önce burayı initilize edeceğimize veya atama yapacağımıza dair bir söz veriyoruz.
-  @Input() model!: Model;
+  @Input() model!: ListModel;
   // @Input() dışarıdan gelen bir değerdir.
 
   constructor() {}

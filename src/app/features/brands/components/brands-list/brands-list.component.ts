@@ -1,8 +1,8 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
-import { Brand } from 'src/app/models/brand';
-import { BrandsService } from 'src/app/services/brands.service';
+import { Brand } from 'src/app/features/brands/models/brand';
+import { BrandsService } from 'src/app/features/brands/services/brands.service';
 import { PaginatedList } from 'src/app/core/models/paginatedList';
 
 @Component({

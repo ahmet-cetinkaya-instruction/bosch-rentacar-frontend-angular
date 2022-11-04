@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { title } from './constants/seo';
+import { title } from './shared/constants/seo';
 
 @Component({
   selector: 'app-root', // HTML'de kullanmak için component tag'ini tanımlar.

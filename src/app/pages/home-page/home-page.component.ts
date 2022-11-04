@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { title } from 'src/app/constants/seo';
+import { title } from 'src/app/shared/constants/seo';
 
 @Component({
   // selector: 'app-home-page',
