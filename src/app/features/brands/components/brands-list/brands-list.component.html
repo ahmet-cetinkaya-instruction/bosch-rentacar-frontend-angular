@@ -1,3 +1,11 @@
+<input
+  type="text"
+  class="form-control mb-3"
+  placeholder="Search"
+  [(ngModel)]="searchInput"
+/>
+<!-- Two-way binding işlemini bizim için gerçekleştirir. Input alanını searchInput state'ine bağlar. -->
+
 <ul class="list-group">
   <li
     class="list-group-item"
@@ -17,7 +25,11 @@
   <!-- *ngFor döngüsünde yer alan let brand, sadece etiketin iç kısmında geçerlidir. -->
   <!-- div kullandığımızda mevcut stiller bozulabilir. -->
   <ng-template #brandsList>
-    <ng-template ngFor let-brand [ngForOf]="brandsPaginatedList.items">
+    <ng-template
+      ngFor
+      let-brand
+      [ngForOf]="brandsPaginatedList.items | filterObject: searchInput:'name'"
+    >
       <!-- Sanal, html tarafında render'lenmayan, etiket işlevi görür. -->
       <li
         class="list-group-item"

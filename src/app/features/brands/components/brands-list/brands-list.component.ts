@@ -13,6 +13,7 @@ import { PaginatedList } from 'src/app/core/models/paginatedList';
 export class BrandsListComponent implements OnInit {
   brandsPaginatedList!: PaginatedList<Brand>;
   selectedBrandName!: string;
+  searchInput: string = '';
 
   // private router: Router;
   // constructor(router: Router) {
@@ -51,4 +52,12 @@ export class BrandsListComponent implements OnInit {
     this.router.navigate(routeCommands);
     // this.router.navigateByUrl(`/brands/${brand.name}`); // ALT+GR/CTRL+ALT + ,
   }
+
+  // handleBrandSearch(event: any): void {
+  //   debugger;
+  //   console.log(
+  //     '🚀 ~ file: brands-list.component.ts ~ line 56 ~ BrandsListComponent ~ handleBrandSearch ~ brandName',
+  //     event
+  //   ); // Turbo Console Log
+  // }
 }

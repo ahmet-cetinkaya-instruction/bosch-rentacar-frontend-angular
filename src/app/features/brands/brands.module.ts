@@ -2,12 +2,13 @@ import { BrandsListComponent } from './components/brands-list/brands-list.compon
 import { BrandsRoutingModule } from './brands-routing.module';
 import { CommonModule } from '@angular/common';
 import { CoreModule } from 'src/app/core/core.module';
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 @NgModule({
   // Bazı Angular bileşenlerini HTML'de kullanmak için tanımlamak gerekir. Tanımlama ilgili modül geçerli olur.
   declarations: [BrandsListComponent],
-  imports: [CommonModule, BrandsRoutingModule, CoreModule],
+  imports: [CommonModule, BrandsRoutingModule, CoreModule, FormsModule],
   // Bu modülde tanımlanan bileşenlerin başka modüller tarafından kullanılmasını sağlar.
   exports: [BrandsListComponent],
 })

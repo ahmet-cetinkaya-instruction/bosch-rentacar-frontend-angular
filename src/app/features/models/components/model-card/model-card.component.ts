@@ -24,5 +24,14 @@ export class ModelCardComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // Number, decimal, 200,00 -> 200.00
+    this.model.dailyPrice = Number(
+      this.model.dailyPrice.toString().replace(',', '.')
+    );
+  }
+
+  convertToNumber(value: string): string {
+    return Number(value).toString();
+  }
 }

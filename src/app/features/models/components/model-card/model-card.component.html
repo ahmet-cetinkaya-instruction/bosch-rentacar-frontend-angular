@@ -1,9 +1,12 @@
 <div class="card" style="width: 18rem">
   <div class="card-body">
-    <h5 class="card-title">{{ model.name }}</h5>
+    <h5 class="card-title">{{ model.name | uppercase }}</h5>
     <p class="card-text">
-      {{ model.brandName }}
+      {{ model.brandName | uppercase }}
     </p>
-    <a href="#" class="btn btn-primary">{{ model.dailyPrice }} $</a>
+    <a href="#" class="btn btn-primary">{{
+      model.dailyPrice | currency: "TRY"
+    }}</a>
   </div>
 </div>
+<!-- Angular Built-in Pipes -->
