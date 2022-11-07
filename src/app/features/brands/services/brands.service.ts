@@ -1,3 +1,4 @@
+import { CreateBrandRequest } from '../models/create-brand-request';
 import { GetListBrandsRequest } from '../models/getListBrandsRequest';
 import { GetListBrandsResponse } from '../models/getListBrandsResponse';
 import { HttpClient } from '@angular/common/http';
@@ -26,5 +27,9 @@ export class BrandsService {
         ...pageRequest,
       },
     });
+  }
+
+  add(request: CreateBrandRequest): Observable<void> {
+    return this.httpClient.post<void>(this.controllerUrl, request);
   }
 }
