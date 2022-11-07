@@ -9,6 +9,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { NgModule } from '@angular/core';
 import { SharedModule } from './shared/shared.module';
 import { ModelsModule } from './features/models/models.module';
+import { BrandFormPageComponent } from './pages/brand-form-page/brand-form-page.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { ModelsModule } from './features/models/models.module';
     AppComponent,
     HomePageComponent,
     LoginPageComponent,
+    BrandFormPageComponent,
   ],
   imports: [
     // Angular modüllerini içeren bir dizi. Bu modüllerin bazıları, Angular'ın temel işlevlerini sağlar. Diğerleri, Angular'ın özelliklerini genişletir.

@@ -1,0 +1,17 @@
+<!-- Reactive Form -->
+<!-- form'a FormGroup'u verdik. -->
+<form [formGroup]="brandForm" (submit)="add()">
+  <div class="mb-3">
+    <label for="brandNameInput" class="form-label">Name</label>
+    <!-- ilgili input alanlarını -->
+    <input
+      type="text"
+      formControlName="name"
+      class="form-control"
+      id="brandNameInput"
+      placeholder="Enter brand name"
+    />
+    <!-- [(ngModel)]="brand.name" -->
+  </div>
+  <button type="submit" class="btn btn-primary">Add</button>
+</form>
