@@ -1,4 +1,4 @@
-<form [formGroup]="loginForm" (submit)="login()">
+<form [formGroup]="loginForm" (submit)="login()" class="needs-validation">
   <!-- EMAIL -->
   <div class="form-floating mb-3">
     <input
@@ -9,6 +9,9 @@
       placeholder="name@example.com"
     />
     <label for="emailInput">Email address</label>
+    <div *ngIf="isControlInvalid('email')" class="text-danger text-start">
+      {{ loginForm.controls["email"].errors | errorMessages }}
+    </div>
   </div>
 
   <!-- PASSWORD -->
@@ -21,6 +24,9 @@
       placeholder="Password"
     />
     <label for="passwordInput">Password</label>
+    <div *ngIf="isControlInvalid('password')" class="text-danger text-start">
+      {{ loginForm.controls["password"].errors | errorMessages }}
+    </div>
   </div>
 
   <!-- <div class="checkbox mb-3">

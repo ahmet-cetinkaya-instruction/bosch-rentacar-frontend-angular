@@ -25,4 +25,11 @@ export class LoginFormComponent implements OnInit {
   login() {
     console.log(this.loginForm);
   }
+
+  isControlInvalid(controlName: string) {
+    return (
+      this.loginForm.get(controlName)?.invalid &&
+      this.loginForm.get(controlName)?.touched
+    );
+  }
 }
