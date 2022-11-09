@@ -9,6 +9,7 @@ import { LocalStorageService } from '../storage/services/local-storage.service';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StorageModule } from '../storage/storage.module';
+import { authInterceptorProvierders } from './interceptors/auth.interceptor';
 
 export const jwtOptionsFactory = (localStorageService: LocalStorageService) => {
   return {
@@ -35,6 +36,9 @@ export const jwtOptionsFactory = (localStorageService: LocalStorageService) => {
   ],
   exports: [LoginFormComponent],
   //: Angular'ın IoC Container'ına AuthServiceBase karşılığında JwtAuthService sınıfını kullanmasını söylüyoruz.
-  providers: [{ provide: AuthServiceBase, useClass: JwtAuthService }],
+  providers: [
+    { provide: AuthServiceBase, useClass: JwtAuthService },
+    authInterceptorProvierders,
+  ],
 })
 export class AuthModule {}

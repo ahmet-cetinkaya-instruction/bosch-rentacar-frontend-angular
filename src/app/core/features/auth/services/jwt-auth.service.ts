@@ -55,6 +55,7 @@ export class JwtAuthService extends AuthServiceBase {
 
   isAuthroized(requiredClaims: string[]): boolean {
     if (!this.isAuthenticated) return false;
+    if (requiredClaims.length === 0) return true;
 
     const decodedToken: JwtTokenPayload = this.jwtHelperService.decodeToken();
     const authUser: AuthUser = {
