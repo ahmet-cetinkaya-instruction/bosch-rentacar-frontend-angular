@@ -1,39 +1,88 @@
+import { Observable, Subject } from 'rxjs';
+
 import { AccessToken } from '../models/access-token';
 import { AuthServiceBase } from './auth-service';
+import { AuthUser } from '../models/auth-user';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { JwtTokenPayload } from '../models/jwt-token-payload';
+import { LocalStorageService } from './../../storage/services/local-storage.service';
 import { LoginUserRequest } from '../models/login-user-request';
 import { LoginUserResponse } from '../models/login-user-response';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class JwtAuthService extends AuthServiceBase {
-  constructor(private httpClient: HttpClient) {
+  constructor(
+    private httpClient: HttpClient,
+    private localStorage: LocalStorageService,
+    private jwtHelperService: JwtHelperService
+  ) {
     super();
   }
 
   login(loginUserRequest: LoginUserRequest): Observable<LoginUserResponse> {
-    return this.httpClient.post<LoginUserResponse>(
-      `${this.controllerUrl}/login`,
-      loginUserRequest
-    );
+    const subject = new Subject<LoginUserResponse>();
+    //: Subject ile subcribe olunabilir bir nesne oluşturuldu.
+
+    this.httpClient
+      .post<LoginUserResponse>(`${this.controllerUrl}/login`, loginUserRequest)
+      .subscribe({
+        next: (response) => {
+          this.saveToken(response.accessToken);
+          subject.next(response); //: Subject nesnesine response değeri gönderildi ve event tetiklendi.
+        },
+        error: (error) => {
+          subject.error(error); //: Subject nesnesine error değeri gönderildi ve event tetiklendi.
+        },
+        complete: () => {
+          subject.complete(); //: Subject nesnesine complete eventi tetiklendi.
+        },
+      });
+
+    return subject.asObservable();
   }
 
   saveToken(accessToken: AccessToken): void {
-    throw new Error('Method not implemented.');
+    this.localStorage.set('accessToken', accessToken.token);
   }
 
   get isAuthenticated(): boolean {
-    throw new Error('Method not implemented.');
+    return !this.jwtHelperService.isTokenExpired();
   }
 
   isAuthroized(requiredClaims: string[]): boolean {
-    throw new Error('Method not implemented.');
+    if (!this.isAuthenticated) return false;
+
+    const decodedToken: JwtTokenPayload = this.jwtHelperService.decodeToken();
+    const authUser: AuthUser = {
+      id: Number(
+        decodedToken[
+          'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
+        ]
+      ),
+      name: decodedToken[
+        'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'
+      ],
+      email:
+        decodedToken[
+          'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
+        ],
+      roles:
+        decodedToken[
+          'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+        ],
+    };
+
+    const isAuthroized: boolean = requiredClaims.some((requiredClaim) =>
+      authUser.roles.includes(requiredClaim)
+    );
+    return isAuthroized;
   }
 
   logout(): void {
-    throw new Error('Method not implemented.');
+    this.localStorage.remove('accessToken');
   }
 }

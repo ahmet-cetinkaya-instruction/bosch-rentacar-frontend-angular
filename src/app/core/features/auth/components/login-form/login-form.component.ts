@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthServiceBase } from '../../services/auth-service';
 import { LoginUserRequest } from './../../models/login-user-request';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -16,7 +17,8 @@ export class LoginFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
-    private authService: AuthServiceBase
+    private authService: AuthServiceBase,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -40,13 +42,14 @@ export class LoginFormComponent implements OnInit {
       email: this.loginForm.value.email,
       password: this.loginForm.value.password,
     };
-    debugger;
+
     this.authService.login(loginUserRequest).subscribe({
-      next: (response) => {
-        this.toastrService.success('Login success');
-      },
-      error: (error) => {
+      error: () => {
         this.toastrService.error('Login failed');
+      },
+      complete: () => {
+        this.toastrService.success('Login success');
+        this.router.navigate(['/']);
       },
     });
   }
