@@ -1,0 +1,33 @@
+<form [formGroup]="loginForm" (submit)="login()">
+  <!-- EMAIL -->
+  <div class="form-floating mb-3">
+    <input
+      type="email"
+      formControlName="email"
+      class="form-control"
+      id="emailInput"
+      placeholder="name@example.com"
+    />
+    <label for="emailInput">Email address</label>
+  </div>
+
+  <!-- PASSWORD -->
+  <div class="form-floating mb-3">
+    <input
+      type="password"
+      formControlName="password"
+      class="form-control"
+      id="passwordInput"
+      placeholder="Password"
+    />
+    <label for="passwordInput">Password</label>
+  </div>
+
+  <!-- <div class="checkbox mb-3">
+    <label>
+      <input type="checkbox" value="remember-me" /> Remember me
+    </label>
+  </div> -->
+
+  <button type="submit" class="w-100 btn btn-lg btn-primary">Sign in</button>
+</form>
