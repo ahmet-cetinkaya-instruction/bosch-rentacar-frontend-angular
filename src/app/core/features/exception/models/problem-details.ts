@@ -1,12 +1,12 @@
 import { HttpStatusCode } from '@angular/common/http';
 
 export interface ProblemDetails {
-  type: string;
-  title: string;
-  status: HttpStatusCode;
-  detail: string;
-  instance: string;
-  extensions: Extension;
+  Type: string;
+  Title: string;
+  Status: HttpStatusCode;
+  Detail: string;
+  Instance: string;
+  Extensions: Extension;
 }
 
 export interface Extension {}

@@ -1,4 +1,5 @@
 import {
+  HTTP_INTERCEPTORS,
   HttpErrorResponse,
   HttpEvent,
   HttpHandler,
@@ -6,7 +7,7 @@ import {
   HttpRequest,
   HttpStatusCode,
 } from '@angular/common/http';
-import { Observable, catchError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 
 import { Injectable } from '@angular/core';
 import { ProblemDetails } from '../models/problem-details';
@@ -27,12 +28,22 @@ export class ErrorHandlingInterceptor implements HttpInterceptor {
         switch (error.type) {
           default:
             this.toastrService.error(
-              problemDetails.detail,
-              problemDetails.title
+              problemDetails.Detail,
+              problemDetails.Title
             );
             break;
         }
+
+        return throwError(() => new Error(problemDetails.Detail));
       })
     );
   }
 }
+
+export const errorHandlingInterceptorProvierders = [
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: ErrorHandlingInterceptor,
+    multi: true,
+  },
+];

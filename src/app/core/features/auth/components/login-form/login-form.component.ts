@@ -55,9 +55,6 @@ export class LoginFormComponent implements OnInit {
     };
 
     this.authService.login(loginUserRequest).subscribe({
-      error: () => {
-        this.toastrService.error('Login failed');
-      },
       complete: () => {
         this.toastrService.success('Login success');
         this.router.navigate(['/']);
