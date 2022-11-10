@@ -29,6 +29,7 @@
     </div>
   </div>
 
+  <small>Test Input</small>
   <!-- PASSWORD COMFIRM -->
   <div class="form-floating mb-3">
     <input
@@ -46,7 +47,6 @@
       {{ loginForm.controls["passwordConfirm"].errors | errorMessages }}
     </div>
   </div>
-
   <!--todo: validation error div component  -->
   <div *ngIf="loginForm.invalid" class="text-danger text-start">
     {{ loginForm.errors | errorMessages }}
