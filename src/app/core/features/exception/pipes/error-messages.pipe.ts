@@ -16,6 +16,7 @@ export class ErrorMessagesPipe implements PipeTransform {
     if (errors['maxlength'])
       return `This field must be at most ${errors['minlength'].requiredLength} characters.`;
     if (errors['pattern']) return 'This field must be a valid pattern.';
+    if (errors['passwordsNotMatch']) return 'Passwords do not match.';
 
     return 'This field is invalid.';
   }

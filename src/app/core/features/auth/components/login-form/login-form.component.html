@@ -29,6 +29,29 @@
     </div>
   </div>
 
+  <!-- PASSWORD COMFIRM -->
+  <div class="form-floating mb-3">
+    <input
+      type="password"
+      formControlName="passwordConfirm"
+      class="form-control"
+      id="passwordConfirmInput"
+      placeholder="Password Confirmation"
+    />
+    <label for="passwordConfirmInput">Password Confirmation</label>
+    <div
+      *ngIf="isControlInvalid('passwordConfirm')"
+      class="text-danger text-start"
+    >
+      {{ loginForm.controls["passwordConfirm"].errors | errorMessages }}
+    </div>
+  </div>
+
+  <!--todo: validation error div component  -->
+  <div *ngIf="loginForm.invalid" class="text-danger text-start">
+    {{ loginForm.errors | errorMessages }}
+  </div>
+
   <!-- <div class="checkbox mb-3">
     <label>
       <input type="checkbox" value="remember-me" /> Remember me

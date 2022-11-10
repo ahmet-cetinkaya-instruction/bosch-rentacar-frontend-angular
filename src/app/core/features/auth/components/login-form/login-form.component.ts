@@ -1,7 +1,14 @@
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthServiceBase } from '../../services/auth-service';
+import { CoreValidations } from 'src/app/core/utilities/validation/core-validations';
 import { LoginUserRequest } from './../../models/login-user-request';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -26,10 +33,14 @@ export class LoginFormComponent implements OnInit {
   }
 
   createForm(): void {
-    this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-    });
+    this.loginForm = this.formBuilder.group(
+      {
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required]],
+        passwordConfirm: ['', [Validators.required]],
+      },
+      { validators: CoreValidations.checkPasswords } //: LoginForm'a validation ekledik.
+    );
   }
 
   login(): void {
