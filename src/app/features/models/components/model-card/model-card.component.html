@@ -1,9 +1,15 @@
-<div class="card" style="width: 18rem">
+<div
+  appHighlight="yellow"
+  mouseEnterColor="white"
+  class="card"
+  style="width: 18rem"
+>
   <div class="card-body">
     <h5 class="card-title">{{ model.name | uppercase }}</h5>
-    <p class="card-text">
+    <span class="card-text" *appMultiple="5; else 10">
+      <!-- <div class="card-text" *appMultiple="5; else 10"> -->
       {{ model.brandName | uppercase }}
-    </p>
+    </span>
     <a href="#" class="btn btn-primary">{{
       model.dailyPrice | currency: "TRY"
     }}</a>
