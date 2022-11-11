@@ -1,11 +1,13 @@
 <div class="container">
   <nav class="mb-3">
-    <app-navbar></app-navbar>
+    <app-navbar (onLogout)="handleOnLogout($event)"></app-navbar>
   </nav>
+  <h6 *ngIf="isLoggedOut" class="display-6">Goodbye World!</h6>
 
   <!-- <app-home-page [title]="title"></app-home-page> -->
   <main>
     <ng-content></ng-content>
+    <router-outlet></router-outlet>
   </main>
 
   <footer class="mt-3">

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
+import { AuthServiceBase } from 'src/app/core/features/auth/services/auth-service';
 import { title } from 'src/app/shared/constants/seo';
 
 @Component({
@@ -9,8 +10,20 @@ import { title } from 'src/app/shared/constants/seo';
 })
 export class NavbarComponent implements OnInit {
   title: string = title;
+  isLoggedIn: boolean = false;
+  //: EventEmitter: child component'ten parent component'e veri & event göndermek için kullanılır.
+  @Output() onLogout = new EventEmitter<boolean>();
 
-  constructor() {}
+  constructor(private authService: AuthServiceBase) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isLoggedIn = this.authService.isAuthenticated;
+  }
+
+  logout() {
+    this.authService.logout();
+    this.isLoggedIn = false;
+    //: emit ile event'i tetikliyoruz.
+    this.onLogout.emit(true);
+  }
 }

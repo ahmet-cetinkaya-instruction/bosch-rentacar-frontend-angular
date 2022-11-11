@@ -32,5 +32,8 @@
         </li>
       </ul>
     </div>
+    <button *ngIf="isLoggedIn" class="btn btn-danger" (click)="logout()">
+      Logout
+    </button>
   </div>
 </nav>
