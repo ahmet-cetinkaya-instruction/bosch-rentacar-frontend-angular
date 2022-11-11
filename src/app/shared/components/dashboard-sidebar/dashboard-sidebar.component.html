@@ -1,3 +1,4 @@
+<h6 class="display-6">{{ dashboardTitle }}</h6>
 <div class="accordion" id="sidebarAccordion">
   <!-- döngünün hangi indeks'de olduğunu bu şekilde alabilirim. -->
   <!-- <div *ngFor="let menuItem of menuItems; index as i" class="accordion-item"> -->
@@ -26,8 +27,9 @@
           <li
             *ngFor="let child of menuItem.children"
             [routerLink]="child.link"
-            class="list-group-item"
+            class="list-group-item cursor-pointer"
             routerLinkActive="active"
+            (click)="onMenuItemClick(menuItem.title)"
           >
             {{ child.title }}
           </li>

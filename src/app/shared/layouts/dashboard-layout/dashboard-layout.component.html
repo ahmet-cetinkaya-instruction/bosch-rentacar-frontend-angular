@@ -5,7 +5,9 @@
 <main class="container my-5">
   <div class="row">
     <div class="col-3">
-      <app-dashboard-sidebar></app-dashboard-sidebar>
+      <app-dashboard-sidebar
+        [dashboardTitle]="welcomeText"
+      ></app-dashboard-sidebar>
     </div>
     <div class="col">
       <router-outlet></router-outlet>
