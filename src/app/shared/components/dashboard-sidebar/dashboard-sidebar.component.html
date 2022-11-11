@@ -1,0 +1,38 @@
+<div class="accordion" id="sidebarAccordion">
+  <!-- döngünün hangi indeks'de olduğunu bu şekilde alabilirim. -->
+  <!-- <div *ngFor="let menuItem of menuItems; index as i" class="accordion-item"> -->
+  <div *ngFor="let menuItem of menuItems; let i = index" class="accordion-item">
+    <h2 class="accordion-header" [id]="'heading' + menuItem.title">
+      <button
+        class="accordion-button"
+        type="button"
+        data-bs-toggle="collapse"
+        [attr.data-bs-target]="'#collapse' + menuItem.title"
+        aria-expanded="true"
+        [attr.aria-controls]="'#collapse' + menuItem.title"
+      >
+        {{ menuItem.title }}
+      </button>
+    </h2>
+    <div
+      [id]="'collapse' + menuItem.title"
+      class="accordion-collapse collapse"
+      [ngClass]="{ show: i === 0 }"
+      [attr.aria-labelledby]="'heading' + menuItem.title"
+      data-bs-parent="#sidebarAccordion"
+    >
+      <div class="accordion-body">
+        <ul class="list-group">
+          <li
+            *ngFor="let child of menuItem.children"
+            [routerLink]="child.link"
+            class="list-group-item"
+            routerLinkActive="active"
+          >
+            {{ child.title }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

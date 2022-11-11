@@ -1,6 +1,7 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
 //# Structural Directive
+//: NgIf, NgFor, NgSwitch
 @Directive({
   selector: '[appMultiple]',
 })
@@ -20,5 +21,6 @@ export class MultipleDirective {
     }
   }
 
-  @Input('appMultipleElse') appMultipleElse!: number;
+  // Then, Else
+  // @Input('appMultipleElse') appMultipleElse!: number;
 }

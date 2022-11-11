@@ -2,6 +2,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from './core/features/auth/guards/auth.guard';
 import { BrandFormPageComponent } from './pages/brand-form-page/brand-form-page.component';
+import { DashboardLayoutComponent } from './shared/layouts/dashboard-layout/dashboard-layout.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { NgModule } from '@angular/core';
@@ -14,12 +15,18 @@ const routes: Routes = [
   {
     path: 'dashboard',
     canActivate: [AuthGuard],
+    component: DashboardLayoutComponent,
     children: [
       {
         path: 'brands/add',
         component: BrandFormPageComponent,
         data: { roles: ['brands.add'] },
       },
+      // brands/edit/:id
+      // brands
+      // models/add
+      // models/edit/:id
+      // models
     ],
   },
 ];
