@@ -33,6 +33,7 @@ export class JwtAuthService extends AuthServiceBase {
         next: (response) => {
           this.saveToken(response.accessToken);
           subject.next(response); //: Subject nesnesine response değeri gönderildi ve event tetiklendi.
+          this.nextOnLoginEvent(true); //: Subject nesnesine response değeri gönderildi ve event tetiklendi.
         },
         error: (error) => {
           subject.error(error); //: Subject nesnesine error değeri gönderildi ve event tetiklendi.
@@ -85,5 +86,9 @@ export class JwtAuthService extends AuthServiceBase {
 
   logout(): void {
     this.localStorage.remove('accessToken');
+  }
+
+  nextOnLoginEvent(value: boolean): void {
+    this.onLogin.next(value);
   }
 }
