@@ -4,6 +4,7 @@ import { LoginUserResponse } from '../models/login-user-response';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { AccessToken } from '../models/access-token';
 import { environment } from 'src/environments/environment';
+import { AuthUser } from '../models/auth-user';
 
 export interface AuthService {
   // register
@@ -23,6 +24,8 @@ export abstract class AuthServiceBase implements AuthService {
   //: Subject'te subscribe olduktan sonraki event'leri, beraberinde gelen verileri elde edebiliyoruz.
   onLogin = new Subject<boolean>();
   //: BehaviorSubject: Subject farklı olarak, bir başlangıça değerine sahiptir. Subscribe olduğu anda, Subjectin O ANKİ değeri elde edilebiliyor.
+
+  authUser$!: Observable<AuthUser | null>;
 
   abstract login(
     loginUserRequest: LoginUserRequest

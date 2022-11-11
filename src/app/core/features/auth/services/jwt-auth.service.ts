@@ -1,4 +1,8 @@
 import { Observable, Subject } from 'rxjs';
+import {
+  deleteAuthUser,
+  setAuthUser,
+} from 'src/app/shared/store/auth/auth.actions';
 
 import { AccessToken } from '../models/access-token';
 import { AuthServiceBase } from './auth-service';
@@ -10,6 +14,8 @@ import { JwtTokenPayload } from '../models/jwt-token-payload';
 import { LocalStorageService } from './../../storage/services/local-storage.service';
 import { LoginUserRequest } from '../models/login-user-request';
 import { LoginUserResponse } from '../models/login-user-response';
+import { SharedStoreState } from 'src/app/shared/store/shared.state';
+import { Store } from '@ngrx/store';
 
 @Injectable({
   providedIn: 'root',
@@ -18,9 +24,11 @@ export class JwtAuthService extends AuthServiceBase {
   constructor(
     private httpClient: HttpClient,
     private localStorage: LocalStorageService,
-    private jwtHelperService: JwtHelperService
+    private jwtHelperService: JwtHelperService,
+    private store: Store<SharedStoreState>
   ) {
     super();
+    this.authUser$ = this.store.select((state) => state.auth.authUser);
   }
 
   login(loginUserRequest: LoginUserRequest): Observable<LoginUserResponse> {
@@ -34,6 +42,7 @@ export class JwtAuthService extends AuthServiceBase {
           this.saveToken(response.accessToken);
           subject.next(response); //: Subject nesnesine response değeri gönderildi ve event tetiklendi.
           this.nextOnLoginEvent(true); //: Subject nesnesine response değeri gönderildi ve event tetiklendi.
+          this.setAuthUserStoreState();
         },
         error: (error) => {
           subject.error(error); //: Subject nesnesine error değeri gönderildi ve event tetiklendi.
@@ -44,6 +53,14 @@ export class JwtAuthService extends AuthServiceBase {
       });
 
     return subject.asObservable();
+  }
+
+  setAuthUserStoreState(): void {
+    this.store.dispatch(setAuthUser({ authUser: this.authUser }));
+  }
+
+  deleteAuthUserStoreState(): void {
+    this.store.dispatch(deleteAuthUser());
   }
 
   saveToken(accessToken: AccessToken): void {
@@ -58,6 +75,14 @@ export class JwtAuthService extends AuthServiceBase {
     if (!this.isAuthenticated) return false;
     if (requiredClaims.length === 0) return true;
 
+    const authUser = this.authUser;
+    const isAuthroized: boolean = requiredClaims.some((requiredClaim) =>
+      authUser.roles.includes(requiredClaim)
+    );
+    return isAuthroized;
+  }
+
+  get authUser(): AuthUser {
     const decodedToken: JwtTokenPayload = this.jwtHelperService.decodeToken();
     const authUser: AuthUser = {
       id: Number(
@@ -77,15 +102,12 @@ export class JwtAuthService extends AuthServiceBase {
           'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
         ],
     };
-
-    const isAuthroized: boolean = requiredClaims.some((requiredClaim) =>
-      authUser.roles.includes(requiredClaim)
-    );
-    return isAuthroized;
+    return authUser;
   }
 
   logout(): void {
     this.localStorage.remove('accessToken');
+    this.deleteAuthUserStoreState();
   }
 
   nextOnLoginEvent(value: boolean): void {

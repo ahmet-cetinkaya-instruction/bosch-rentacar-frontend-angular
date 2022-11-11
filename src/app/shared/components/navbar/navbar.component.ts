@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { AuthServiceBase } from 'src/app/core/features/auth/services/auth-service';
+import { AuthUser } from 'src/app/core/features/auth/models/auth-user';
+import { Observable } from 'rxjs';
 import { title } from 'src/app/shared/constants/seo';
 
 @Component({
@@ -13,12 +15,16 @@ export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false;
   //: EventEmitter: child component'ten parent component'e veri & event göndermek için kullanılır.
   @Output() onLogout = new EventEmitter<boolean>();
+  authUser$: Observable<AuthUser | null> = this.authService.authUser$;
 
   constructor(private authService: AuthServiceBase) {}
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isAuthenticated;
     this.subscribeOnLogin();
+    // TS tarafında subscribe olunabilir.
+    // this.authUser$.subscribe((authUser) => {
+    // });
   }
 
   subscribeOnLogin() {

@@ -32,8 +32,11 @@
         </li>
       </ul>
     </div>
-    <button *ngIf="isLoggedIn" class="btn btn-danger" (click)="logout()">
-      Logout
-    </button>
+    <div *ngIf="isLoggedIn">
+      <span>
+        {{ (authUser$ | async)!.name }}
+      </span>
+      <button class="btn btn-danger" (click)="logout()">Logout</button>
+    </div>
   </div>
 </nav>
